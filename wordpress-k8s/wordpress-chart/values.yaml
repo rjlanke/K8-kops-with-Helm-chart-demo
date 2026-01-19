@@ -1,0 +1,29 @@
+wordpress:
+  image: wordpress:latest
+  replicas: 2
+  port: 80
+  storage:
+    size: 3Gi
+    storageClass: default
+
+mysql:
+  image: mysql:8.0
+  replicas: 1
+  port: 3306
+  storage:
+    size: 3Gi
+    storageClass: default
+
+secret:
+  mysqlRootPassword: cm9vdHBhc3N3b3Jk  # rootpassword
+  mysqlDatabase: d29yZHByZXNz  # wordpress
+  mysqlUser: d29yZHByZXNz  # wordpress
+  mysqlPassword: d29yZHByZXNzcGFzcw==  # wordpresspass
+  wordpressDbPassword: d29yZHByZXNzcGFzcw==  # wordpresspass
+
+ingress:
+  enabled: true
+  className: nginx
+  host: wordpress.2ml.online
+  path: /
+  pathType: Prefix
